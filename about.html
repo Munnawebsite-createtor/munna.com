@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head class="bg-fixed">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss-cdn@3.4.1/tailwindcss.js"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+
+    <title>Document</title>
+    <link rel="stylesheet" href="input.css">
+
+    <link rel="shortcut icon" href="img/lock.svg"|>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @keyframes neon-pulse {
+            0%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #00ffff, 0 0 35px #00ffff, 0 0 40px #00ffff, 0 0 50px #00ffff, 0 0 75px #00ffff; }
+            50% { text-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 7px #fff, 0 0 10px #00ffff, 0 0 17px #00ffff, 0 0 20px #00ffff, 0 0 25px #00ffff, 0 0 37px #00ffff; }
+        }
+
+        .neon-text {
+            animation: neon-pulse 1.5s infinite alternate;
+        }
+
+        .bg-animated {
+            background: linear-gradient(-45deg, #000000, #1a1a1a, #000033, #003366);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .cyber-grid {
+            background-image: linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: cyber-grid-move 20s linear infinite;
+        }
+
+        @keyframes cyber-grid-move {
+            0% { background-position: 0 0; }
+            100% { background-position: 20px 20px; }
+        }
+
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #00ffff;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::before {
+            transform: translateX(0);
+        }
+
+        .nav-link::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(100%);
+            background: linear-gradient(to bottom, #00ffff, #0080ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            transform: translateY(0);
+        }
+
+        .glitch-effect {
+            position: relative;
+        }
+
+        .glitch-effect::before,
+        .glitch-effect::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        .glitch-effect::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00de;
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim 3s infinite linear alternate-reverse;
+        }
+
+        .glitch-effect::after {
+            left: -2px;
+            text-shadow: -2px 0 #00ffff;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(39px, 9999px, 71px, 0); }
+            20% { clip: rect(3px, 9999px, 5px, 0); }
+            40% { clip: rect(6px, 9999px, 38px, 0); }
+            60% { clip: rect(13px, 9999px, 43px, 0); }
+            80% { clip: rect(44px, 9999px, 93px, 0); }
+            100% { clip: rect(54px, 9999px, 47px, 0); }
+        }
+
+        #menu-toggle:checked ~ .menu-icon .hamburger {
+            transform: rotate(45deg);
+        }
+
+        #menu-toggle:checked ~ .menu-icon .hamburger::before {
+            transform: translateY(8px) rotate(90deg);
+        }
+
+        #menu-toggle:checked ~ .menu-icon .hamburger::after {
+            transform: translateY(-8px) rotate(90deg);
+        }
+
+        .hamburger,
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            display: block;
+            background: #00ffff;
+            height: 3px;
+            width: 30px;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .hamburger::before { transform: translateY(-8px); }
+        .hamburger::after { transform: translateY(8px); }
+
+        @media (max-width: 768px) {
+            .menu {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                height: 0;
+                background: rgba(0, 0, 0, 0.9);
+                overflow: hidden;
+                transition: height 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+
+            #menu-toggle:checked ~ .menu {
+                height: calc(100vh - 60px);
+            }
+        }
+
+        .feature-card {
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .feature-icon {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotate(360deg) scale(1.2);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .testimonial-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .neon-border {
+            box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #00ffff, 0 0 35px #00ffff, 0 0 40px #00ffff;
+            animation: neon-border-pulse 1.5s infinite alternate;
+        }
+
+        @keyframes neon-border-pulse {
+            0%, 100% { box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #00ffff, 0 0 35px #00ffff, 0 0 40px #00ffff; }
+            50% { box-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 7px #fff, 0 0 10px #00ffff, 0 0 17px #00ffff, 0 0 20px #00ffff; }
+        }
+    </style>
+
+</head>
+
+<body class="bg-slate-950">
+<!--Menu atart-->
+
+    <nav class="bg-slate-950 shadow-lg fixed w-full z-50 py-4 shadow-slate-900">
+        <div class="container mx-auto px-16">
+            <div class="flex justify-between items-left py-4 max-sm:-ml-72">
+              <a><img src="img/sr.jpg" class="w-40 h-20 max-sm:h-10 max-sm:hidden rounded-3xl"></a>
+              <a><img src="img/yy.jpg" class="max-sm:inline-block max-sm:w-16 max-sm:h-16 max-sm:-mt-4 hidden rounded-3xl"></a>
+                <input type="checkbox" id="menu-toggle" class="hidden">
+                <label for="menu-toggle" class="menu-icon cursor-pointer md:hidden">
+                    <span class="hamburger"></span>
+                </label>
+                <ul class="menu hidden md:flex md:items-center space-x-6 text-white">
+                    <li><a href="index.html" class="nav-link" data-text="Home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-text="About">About</a></li>
+                    <li><a href="portfolio.html" class="nav-link" data-text="Portfolio">Portfolio</a></li>
+                    <li><a href="team.html" class="nav-link" data-text="Team">Team</a></li>
+                    <li><a href="previous project.html" class="nav-link" data-text="My Project">previous project</a></li>
+                    <li><a href="contact.html" class="nav-link" data-text="Contact">Contact</a></li>
+                    <li><a href="#" class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold py-2 px-4 rounded hover:from-cyan-600 hover:to-blue-600 transition-all duration-300">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+      </nav>
+      <!--Menu end-->
+
+<br><br><br><br><br><br><br><br>
+
+<!--about start-->
+<div class="w-full max-w-7xl px-4 mx-auto sm:px-8 mt-24">
+    <blockquote class="relative grid items-center  shadow-xl md:grid-cols-3 rounded-xl">
+        
+        <img class="hidden object-cover w-full h-full rounded-l-xl md:block" style="clip-path: polygon(0 0%, 100% 0%, 75% 100%, 0% 100%);" src="img/abt.jpg">
+
+        <article class="relative p-6 md:p-8 md:col-span-2">
+            <svg class="absolute top-0 right-0 hidden w-24 h-24 -mt-12 -mr-12 text-primary-600 md:block" width="256"
+                height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M65.44 153.526V149.526H61.44H20.48C11.3675 149.526 4 142.163 4 133.105V51.4211C4 42.3628 11.3675 35 20.48 35H102.4C111.513 35 118.88 42.3628 118.88 51.4211V166.187C118.88 195.935 95.103 220.165 65.44 220.979V153.526ZM198.56 153.526V149.526H194.56H153.6C144.487 149.526 137.12 142.163 137.12 133.105V51.4211C137.12 42.3628 144.487 35 153.6 35H235.52C244.633 35 252 42.3628 252 51.4211V166.187C252 195.935 228.223 220.165 198.56 220.979V153.526Z"
+                    stroke="currentColor" stroke-width="8"></path>
+            </svg>
+
+            <div class="space-y-8">
+                <p class="text-cyan-400 sm:leading-relaxed md:text-2xl">
+                    Hi, I'm munna. I'm a 30-year-old website designer with a passion for creating innovative solutions. I graduated with a degree in Computer Institute from a prestigious university and have been working in the tech industry for over a decade. Throughout my career, I have gained extensive experience in programming languages like html,css, tailwind css,bootstrap and, wordpress Ecommerce and woocommerce . I thrive in challenging environments and enjoy collaborating with teams to develop cutting-edge website.
+                </p>
+
+                <footer class="flex items-center space-x-4 md:space-x-0">
+                    <img class="w-12 h-12 rounded-full md:hidden" src="https://randomuser.me/api/portraits/men/68.jpg">
+                    <span class="font-bold text-cyan-400 text-5xl">Munna</span>
+                </footer>
+            </div>
+        </article>
+    </blockquote>
+</div>
+<!--about end-->
+
+
+
+<!--form-->
+<div
+            class="grid md:grid-cols-2 items-center mt-60 overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-3xl max-w-6xl mx-auto bg-white my-6 font-[sans-serif]">
+            <div class="p-8 bg-gray-900">
+                <h2 class="text-3xl font-bold text-white">Get In <span class="text-yellow-400">Touch</span></h2>
+                <p class="text-sm text-gray-300 mt-4 leading-relaxed">Have a specific inquiry or looking to explore new opportunities? Our
+                    experienced team is ready to engage with you.</p>
+
+                <form>
+                    <div class="space-y-4 mt-8">
+                        <input type="text" placeholder="Full Name"
+                            class="px-2 py-3 bg-transparent text-gray-300 w-full text-sm border-b border-gray-400 focus:border-yellow-400 outline-none" />
+                        <input type="text" placeholder="Street"
+                            class="px-2 py-3 bg-transparent text-gray-300 w-full text-sm border-b border-gray-400 focus:border-yellow-400 outline-none" />
+                        <div class="grid grid-cols-2 gap-6">
+                            <input type="text" placeholder="City"
+                                class="px-2 py-3 bg-transparent text-gray-300 w-full text-sm border-b border-gray-400 focus:border-yellow-400 outline-none" />
+
+                            <input type="text" placeholder="Postcode"
+                                class="px-2 py-3 bg-transparent text-gray-300 w-full text-sm border-b border-gray-400 focus:border-yellow-400 outline-none" />
+                        </div>
+                        <input type="number" placeholder="Phone No."
+                            class="px-2 py-3 bg-transparent text-gray-300 w-full text-sm border-b border-gray-400 focus:border-yellow-400 outline-none" />
+
+                        <input type="email" placeholder="Email"
+                            class="px-2 py-3 bg-transparent text-gray-300 w-full text-sm border-b border-gray-400 focus:border-yellow-400 outline-none" />
+
+                        <textarea placeholder="Write Message"
+                            class="px-2 pt-3 bg-transparent text-gray-300 w-full text-sm border-b border-gray-400 focus:border-yellow-400 outline-none"></textarea>
+                    </div>
+
+                    <button type="button"
+                        class="mt-8 flex items-center justify-center text-sm w-full rounded-md px-6 py-3 tracking-wide text-gray-800 bg-yellow-400 hover:bg-yellow-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill='currectColor' class="mr-2"
+                            viewBox="0 0 548.244 548.244">
+                            <path fill-rule="evenodd"
+                                d="M392.19 156.054 211.268 281.667 22.032 218.58C8.823 214.168-.076 201.775 0 187.852c.077-13.923 9.078-26.24 22.338-30.498L506.15 1.549c11.5-3.697 24.123-.663 32.666 7.88 8.542 8.543 11.577 21.165 7.879 32.666L390.89 525.906c-4.258 13.26-16.575 22.261-30.498 22.338-13.923.076-26.316-8.823-30.728-22.032l-63.393-190.153z"
+                                clip-rule="evenodd" data-original="#000000" />
+                        </svg>
+                        Send Message
+                    </button>
+                </form>
+
+                <ul class="mt-4 flex flex-wrap justify-center gap-4 lg:space-x-6 max-lg:flex-col max-lg:items-center max-lg:space-y-2 ">
+                    <li class="flex items-center text-yellow-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill='currentColor'
+                            viewBox="0 0 479.058 479.058">
+                            <path
+                                d="M434.146 59.882H44.912C20.146 59.882 0 80.028 0 104.794v269.47c0 24.766 20.146 44.912 44.912 44.912h389.234c24.766 0 44.912-20.146 44.912-44.912v-269.47c0-24.766-20.146-44.912-44.912-44.912zm0 29.941c2.034 0 3.969.422 5.738 1.159L239.529 264.631 39.173 90.982a14.902 14.902 0 0 1 5.738-1.159zm0 299.411H44.912c-8.26 0-14.971-6.71-14.971-14.971V122.615l199.778 173.141c2.822 2.441 6.316 3.655 9.81 3.655s6.988-1.213 9.81-3.655l199.778-173.141v251.649c-.001 8.26-6.711 14.97-14.971 14.97z"
+                                data-original="#000000" />
+                        </svg>
+                        <a href="javascript:void(0)" class="text-current text-sm ml-3">
+                            info@example.com
+                        </a>
+                    </li>
+                    <li class="flex items-center text-yellow-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill='currentColor'
+                            viewBox="0 0 482.6 482.6">
+                            <path
+                                d="M98.339 320.8c47.6 56.9 104.9 101.7 170.3 133.4 24.9 11.8 58.2 25.8 95.3 28.2 2.3.1 4.5.2 6.8.2 24.9 0 44.9-8.6 61.2-26.3.1-.1.3-.3.4-.5 5.8-7 12.4-13.3 19.3-20 4.7-4.5 9.5-9.2 14.1-14 21.3-22.2 21.3-50.4-.2-71.9l-60.1-60.1c-10.2-10.6-22.4-16.2-35.2-16.2-12.8 0-25.1 5.6-35.6 16.1l-35.8 35.8c-3.3-1.9-6.7-3.6-9.9-5.2-4-2-7.7-3.9-11-6-32.6-20.7-62.2-47.7-90.5-82.4-14.3-18.1-23.9-33.3-30.6-48.8 9.4-8.5 18.2-17.4 26.7-26.1 3-3.1 6.1-6.2 9.2-9.3 10.8-10.8 16.6-23.3 16.6-36s-5.7-25.2-16.6-36l-29.8-29.8c-3.5-3.5-6.8-6.9-10.2-10.4-6.6-6.8-13.5-13.8-20.3-20.1-10.3-10.1-22.4-15.4-35.2-15.4-12.7 0-24.9 5.3-35.6 15.5l-37.4 37.4c-13.6 13.6-21.3 30.1-22.9 49.2-1.9 23.9 2.5 49.3 13.9 80 17.5 47.5 43.9 91.6 83.1 138.7zm-72.6-216.6c1.2-13.3 6.3-24.4 15.9-34l37.2-37.2c5.8-5.6 12.2-8.5 18.4-8.5 6.1 0 12.3 2.9 18 8.7 6.7 6.2 13 12.7 19.8 19.6 3.4 3.5 6.9 7 10.4 10.6l29.8 29.8c6.2 6.2 9.4 12.5 9.4 18.7s-3.2 12.5-9.4 18.7c-3.1 3.1-6.2 6.3-9.3 9.4-9.3 9.4-18 18.3-27.6 26.8l-.5.5c-8.3 8.3-7 16.2-5 22.2.1.3.2.5.3.8 7.7 18.5 18.4 36.1 35.1 57.1 30 37 61.6 65.7 96.4 87.8 4.3 2.8 8.9 5 13.2 7.2 4 2 7.7 3.9 11 6 .4.2.7.4 1.1.6 3.3 1.7 6.5 2.5 9.7 2.5 8 0 13.2-5.1 14.9-6.8l37.4-37.4c5.8-5.8 12.1-8.9 18.3-8.9 7.6 0 13.8 4.7 17.7 8.9l60.3 60.2c12 12 11.9 25-.3 37.7-4.2 4.5-8.6 8.8-13.3 13.3-7 6.8-14.3 13.8-20.9 21.7-11.5 12.4-25.2 18.2-42.9 18.2-1.7 0-3.5-.1-5.2-.2-32.8-2.1-63.3-14.9-86.2-25.8-62.2-30.1-116.8-72.8-162.1-127-37.3-44.9-62.4-86.7-79-131.5-10.3-27.5-14.2-49.6-12.6-69.7z"
+                                data-original="#000000"></path>
+                        </svg>
+                        <a href="javascript:void(0)" class="text-current text-sm ml-3">
+                            +158 996 888
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="z-10 relative h-full max-md:min-h-[350px]">
+                <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    class="left-0 top-0 h-full w-full rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg" frameborder="0"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+<!--form-->
+
+
+
+    
+    <script>
+        // Navbar toggle functionality
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.querySelector('.menu');
+
+        menuToggle.addEventListener('change', function() {
+            if (this.checked) {
+                menu.classList.remove('hidden');
+                menu.classList.add('flex', 'flex-col', 'items-center', 'justify-center', 'space-y-4');
+            } else {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex', 'flex-col', 'items-center', 'justify-center', 'space-y-4');
+            }
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                menu.classList.remove('hidden', 'flex', 'flex-col', 'items-center', 'justify-center', 'space-y-4');
+                menu.classList.add('md:flex', 'md:items-center');
+                menuToggle.checked = false;
+            } else if (!menuToggle.checked) {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex', 'flex-col', 'items-center', 'justify-center', 'space-y-4');
+            }
+        });
+
+        // Particle effect for hero section
+        function createParticle() {
+            const particles = document.getElementById('particles');
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const size = Math.random() * 5 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            const x = Math.random() * window.innerWidth;
+            const y = window.innerHeight;
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+            
+            const hue = Math.random() * 360;
+            particle.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
+            
+            const duration = Math.random() * 3 + 2;
+            particle.style.animation = `float-up ${duration}s linear`;
+            
+            particles.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, duration * 1000);
+        }
+
+        setInterval(createParticle, 50);
+    </script>
+</body>
+</html>
